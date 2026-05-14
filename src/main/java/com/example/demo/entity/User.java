@@ -2,6 +2,7 @@ package com.example.demo.entity;
 
 import lombok.Data;
 import lombok.ToString;
+import java.time.LocalDateTime;
 
 @Data
 public class User {
@@ -12,6 +13,6 @@ public class User {
     private String password;
     private String createTime;
     private Integer creatorId;
-    private String lastLoginTime;
+    private LocalDateTime lastLoginTime;
     private Integer loginCount;
 }
