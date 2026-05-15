@@ -10,6 +10,12 @@ import java.util.List;
 public interface BookMapper {
     @Select("SELECT * FROM book")
     List<Book> findALL();
+
+    @Select("SELECT * FROM book ORDER BY borrow_count DESC LIMIT 10")
+    List<Book> findBorrowTop10();
+
+    @Select("SELECT * FROM book ORDER BY rating DESC LIMIT 10")
+    List<Book> findRatingTop10();
 }
 
 
