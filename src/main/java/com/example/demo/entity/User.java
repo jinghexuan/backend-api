@@ -15,4 +15,5 @@ public class User {
     private Integer creatorId;
     private LocalDateTime lastLoginTime;
     private Integer loginCount;
+    private Integer status;
 }

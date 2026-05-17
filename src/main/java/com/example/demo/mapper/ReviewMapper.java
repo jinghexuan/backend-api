@@ -1,4 +1,10 @@
 package com.example.demo.mapper;
 
-public class ReviewMapper {
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
+
+@Mapper
+public interface ReviewMapper {
+    @Select("SELECT COUNT(*) FROM review")
+    int countReview();
 }
