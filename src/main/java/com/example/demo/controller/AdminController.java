@@ -50,6 +50,6 @@ public class AdminController {
     }
     @GetMapping("/borrow/category")
     public Result getCategoryStats(){
-        return Result.success(adminService.getCategory());
+        return Result.success(adminService.getCategoryStats());
     }
 }
