@@ -26,4 +26,5 @@ public class BorrowRecord {
     private Integer renewCount;
 
     private LocalDateTime lastRenewedAt;
+
 }

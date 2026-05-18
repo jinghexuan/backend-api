@@ -1,4 +1,9 @@
 package com.example.demo.mapper;
 
-public class ReviewReplayMapper {
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
+
+@Mapper
+public interface ReviewReplayMapper {
+
 }
