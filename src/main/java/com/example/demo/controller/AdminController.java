@@ -1,8 +1,11 @@
 package com.example.demo.controller;
 
 import com.example.demo.common.Result;
+import com.example.demo.entity.Book;
 import com.example.demo.service.AdminService;
+import com.example.demo.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -52,4 +55,32 @@ public class AdminController {
     public Result getCategoryStats(){
         return Result.success(adminService.getCategoryStats());
     }
+    @Autowired
+    private BookService bookService;
+
+    @GetMapping("/books")
+    public Result listBooks() {
+        return Result.success(bookService.list());
+    }
+
+    @GetMapping("/books/{id}")
+    public Result getBookById(@PathVariable Integer id) {
+        return Result.success(bookService.getById(id));
+    }
+
+    @PostMapping("/books")
+    public Result addBook(@RequestBody Book book) {
+        return Result.success(bookService.add(book));
+    }
+
+    @PutMapping("/books")
+    public Result updateBook(@RequestBody Book book) {
+        return Result.success(bookService.update(book));
+    }
+
+    @DeleteMapping("/books/{id}")
+    public Result deleteBook(@PathVariable Integer id) {
+        return Result.success(bookService.delete(id));
+    }
 }
+
