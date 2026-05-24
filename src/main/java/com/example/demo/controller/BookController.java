@@ -14,14 +14,14 @@ public class BookController {
     private BookService BookService;
     @Autowired
     private BookService bookService;
-s
+
     @GetMapping("/list")
     public Result list(){
     return Result.success(bookService.list());
 }
     @GetMapping ("/{id}")
         public Result getById(@PathVariable Integer id) {
-        return Result.success(bookService.getById(id));
+       return Result.success(bookService.getById(id));
     }
     @PostMapping
     public Result add(@RequestBody Book book){
@@ -32,7 +32,7 @@ s
         return Result.success(bookService.update(book));
     }
     @DeleteMapping("/{id}")
-    public Result delete(@PathVariable Integer id){
+   public Result delete(@PathVariable Integer id){
         return Result.success(bookService.delete(id));
     }
 
