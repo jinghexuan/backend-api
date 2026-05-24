@@ -13,6 +13,7 @@ public class Book {
         private LocalDateTime createTime;
         private Integer borrowCount;
         private Double rating;
+        private String category;
 
 }
       

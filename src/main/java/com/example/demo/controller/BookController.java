@@ -11,17 +11,18 @@ import org.springframework.web.bind.annotation.*;
 public class BookController {
 
     @Autowired
-    private BookService BookService;
-    @Autowired
     private BookService bookService;
-
     @GetMapping("/list")
     public Result list(){
     return Result.success(bookService.list());
 }
     @GetMapping ("/{id}")
-        public Result getById(@PathVariable Integer id) {
-       return Result.success(bookService.getById(id));
+    public Result getById(@PathVariable Integer id) {
+        Book book = bookService.getById(id);
+        if (book == null) {
+            return Result.error("图书不存在");
+        }
+        return Result.success(book);
     }
     @PostMapping
     public Result add(@RequestBody Book book){
@@ -32,7 +33,7 @@ public class BookController {
         return Result.success(bookService.update(book));
     }
     @DeleteMapping("/{id}")
-   public Result delete(@PathVariable Integer id){
+    public Result delete(@PathVariable Integer id){
         return Result.success(bookService.delete(id));
     }
 
