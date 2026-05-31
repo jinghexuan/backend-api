@@ -12,15 +12,17 @@ public class UserController {
     @Autowired
     private UserService userService;
     @GetMapping("/borrows")
-    public Result getBorrowList(){
-        return Result.success(userService.getBorrowList());
+    public Result getBorrowList(@RequestParam Integer userId) {
+        return Result.success(userService.getBorrowList(userId));
     }
+
     @GetMapping("/reviews")
-    public Result getMyReviews(){
-        return Result.success(userService.getMyReviews());
+    public Result getMyReviews(@RequestParam Integer userId) {
+        return Result.success(userService.getMyReviews(userId));
     }
+
     @PutMapping("/info")
-    public Result updateInfo(@RequestBody User user){
-        return Result.success(userService.updateInfo());
+    public Result updateInfo(@RequestBody User user) {
+        return Result.success(userService.updateInfo(user));
     }
 }

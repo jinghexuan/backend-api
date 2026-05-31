@@ -14,11 +14,11 @@ public class RankingController {
     private RankingService rankingService;
     @GetMapping("/borrow")
     public Result borrowRanking(){
-        return Result.success(rankingService.borrowRanking());
+        return Result.success(rankingService.borrowTop10());
     }
 @GetMapping("/score")
     public Result scoreRanking(){
-        return Result.success(rankingService.scoreRanking());
+        return Result.success(rankingService.ratingTop10());
     }
 }
 

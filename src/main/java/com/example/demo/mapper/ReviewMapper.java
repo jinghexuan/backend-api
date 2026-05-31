@@ -28,6 +28,9 @@ public interface ReviewMapper {
     @Update("UPDATE review SET content=#{content}, rating=#{rating} WHERE review_id=#{reviewId}")
     int update(Review review);
 
+    @Select("SELECT * FROM review WHERE user_id = #{userId} ORDER BY create_time DESC")
+    List<Review> findByUserId(Integer userId);
+
     @Delete("DELETE FROM review WHERE review_id = #{reviewId}")
     int deleteById(Integer reviewId);
 

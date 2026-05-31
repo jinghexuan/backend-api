@@ -22,4 +22,7 @@ public interface UserMapper {
     int countActiveUsers();
 @Update("UPDATE user SET status=#{status} WHERE personId=#{personId} ")
     int updateUserStatus(@Param("status") int status,@Param("personId") long personId);
+
+    @Update("UPDATE user SET user_name=#{userName} WHERE personId=#{personId}")
+    int updateInfo(@Param("userName") String userName, @Param("personId") long personId);
 }
