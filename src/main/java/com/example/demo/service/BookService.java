@@ -73,6 +73,9 @@ public class BookService {
                 if (incoming.getCreateTime() != null) {
                     existing.setCreateTime(incoming.getCreateTime());
                 }
+                if (incoming.getCover() != null) {
+                    existing.setCover(incoming.getCover());
+                }
 
                 bookMapper.update(existing);
                 return existing;

@@ -5,8 +5,19 @@ import com.example.demo.entity.Book;
 import com.example.demo.service.AdminService;
 import com.example.demo.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/admin")
@@ -81,6 +92,45 @@ public class AdminController {
     @DeleteMapping("/books/{id}")
     public Result deleteBook(@PathVariable Integer id) {
         return Result.success(bookService.delete(id));
+    }
+
+    /**
+     * 封面上传
+     * POST /api/admin/upload/cover
+     */
+    @PostMapping("/upload/cover")
+    public Result uploadCover(@RequestParam("file") MultipartFile file) {
+        if (file.isEmpty()) {
+            return Result.error("文件为空");
+        }
+
+        try {
+            // 上传目录：项目根目录下的 uploads/
+            String uploadDir = System.getProperty("user.dir") + File.separator + "uploads";
+            File dir = new File(uploadDir);
+            if (!dir.exists()) {
+                dir.mkdirs();
+            }
+
+            // 生成唯一文件名
+            String originalName = file.getOriginalFilename();
+            String suffix = "";
+            if (originalName != null && originalName.contains(".")) {
+                suffix = originalName.substring(originalName.lastIndexOf("."));
+            }
+            String newFileName = UUID.randomUUID().toString() + suffix;
+
+            // 保存文件
+            Path filePath = Paths.get(uploadDir, newFileName);
+            Files.write(filePath, file.getBytes());
+
+            // 返回可访问的 URL
+            String url = "http://localhost:8081/uploads/" + newFileName;
+            return Result.success(url);
+
+        } catch (IOException e) {
+            return Result.error("上传失败: " + e.getMessage());
+        }
     }
 }
 

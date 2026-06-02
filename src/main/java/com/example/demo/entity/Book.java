@@ -14,6 +14,7 @@ public class Book {
         private Integer borrowCount;
         private Double rating;
         private String category;
+        private String cover;
 
 }
       

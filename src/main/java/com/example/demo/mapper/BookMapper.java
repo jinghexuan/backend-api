@@ -18,7 +18,7 @@ public interface BookMapper {
     @Select("SELECT * FROM book")
     List<Book> findALL();
 
-    @Select("SELECT id,title, author, isbn, total, available, create_time, rating ,category,borrow_count FROM book WHERE id = #{id}")
+    @Select("SELECT id,title, author, isbn, total, available, create_time, rating ,category,borrow_count,cover FROM book WHERE id = #{id}")
     Book findById(Integer id);
 
 
@@ -31,13 +31,13 @@ public interface BookMapper {
     @Select("SELECT * FROM book ORDER BY rating DESC LIMIT 10")
     List<Book> findRatingTop10();
 
-    @Insert("INSERT INTO book(title, author, isbn, total, available, create_time,category,borrow_count) " +
-            "VALUES(#{title}, #{author}, #{isbn}, #{total}, #{available}, #{createTime}, #{category},#{borrowCount}")
+    @Insert("INSERT INTO book(title, author, isbn, total, available, create_time,category,borrow_count,cover) " +
+            "VALUES(#{title}, #{author}, #{isbn}, #{total}, #{available}, #{createTime}, #{category},#{borrowCount},#{cover})")
     @Options(useGeneratedKeys = true, keyProperty = "id")
     int insert(Book book);
 
     @Update("UPDATE book SET title=#{title}, author=#{author}, isbn=#{isbn}, total=#{total}, " +
-            "available=#{available}, create_time=#{createTime}, category=#{category},borrow_count=#{borrowCount} WHERE id=#{id}")
+            "available=#{available}, create_time=#{createTime}, category=#{category},borrow_count=#{borrowCount},cover=#{cover} WHERE id=#{id}")
     int update(Book book);
 
     @Delete("DELETE FROM book WHERE id = #{id}")
