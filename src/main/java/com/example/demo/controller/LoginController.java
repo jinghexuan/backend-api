@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api")
@@ -32,6 +33,8 @@ public class LoginController {
             Map<String, Object> data = new HashMap<>();
             data.put("userName", user.getUserName());
             data.put("personId", user.getPersonId());
+            data.put("token", UUID.randomUUID().toString());
+            data.put("role", user.getUserTypeId() == 1 ? "ADMIN" : "USER");
             result.put("data", data);
         } else {
             result.put("code", 401);

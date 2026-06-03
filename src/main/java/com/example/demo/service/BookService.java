@@ -19,6 +19,14 @@ public class BookService {
                 return bookMapper.findALL();
             }
 
+            /** 按分类筛选图书 */
+            public List<Book> listByCategory(String category) {
+                if (category == null || category.isEmpty()) {
+                    return bookMapper.findALL();
+                }
+                return bookMapper.findByCategory(category);
+            }
+
             /** 图书详情 */
             public Book getById(Integer id) {
                 if (id == null) {
@@ -31,6 +39,9 @@ public class BookService {
             public Book add(Book book) {
                 if (book == null) {
                     throw new IllegalArgumentException("图书信息不能为空");
+                }
+                if (book.getCreateTime() == null) {
+                    book.setCreateTime(java.time.LocalDateTime.now());
                 }
                 if (book.getBorrowCount() == null) {
                     book.setBorrowCount(0);
@@ -73,8 +84,20 @@ public class BookService {
                 if (incoming.getCreateTime() != null) {
                     existing.setCreateTime(incoming.getCreateTime());
                 }
+                if (incoming.getCategory() != null) {
+                    existing.setCategory(incoming.getCategory());
+                }
                 if (incoming.getCover() != null) {
                     existing.setCover(incoming.getCover());
+                }
+                if (incoming.getPublisher() != null) {
+                    existing.setPublisher(incoming.getPublisher());
+                }
+                if (incoming.getPublishDate() != null) {
+                    existing.setPublishDate(incoming.getPublishDate());
+                }
+                if (incoming.getDescription() != null) {
+                    existing.setDescription(incoming.getDescription());
                 }
 
                 bookMapper.update(existing);

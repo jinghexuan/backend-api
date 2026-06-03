@@ -100,6 +100,7 @@ public class AdminController {
      */
     @PostMapping("/upload/cover")
     public Result uploadCover(@RequestParam("file") MultipartFile file) {
+        System.out.println("[UPLOAD] 收到上传请求, 文件名=" + file.getOriginalFilename() + " 大小=" + file.getSize());
         if (file.isEmpty()) {
             return Result.error("文件为空");
         }
@@ -126,9 +127,12 @@ public class AdminController {
 
             // 返回可访问的 URL
             String url = "http://localhost:8081/uploads/" + newFileName;
+            System.out.println("[UPLOAD] 上传成功: " + url);
             return Result.success(url);
 
-        } catch (IOException e) {
+        } catch (Exception e) {
+            System.err.println("[UPLOAD ERROR] 上传异常: " + e.getClass().getName() + ": " + e.getMessage());
+            e.printStackTrace();
             return Result.error("上传失败: " + e.getMessage());
         }
     }
